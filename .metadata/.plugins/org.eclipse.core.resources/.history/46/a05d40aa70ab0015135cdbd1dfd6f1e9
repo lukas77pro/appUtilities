@@ -1,0 +1,58 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Elo {
+	public static void main(String[] args) {
+		Calendar calendar = GregorianCalendar.getInstance();
+
+		System.out.println(calendar.getTime());
+		int prevMonthDays = getDaysOfMonth(calendar);
+
+		System.out.println(calendar.getTime());
+		int firstDay = getFirstDayOfMouth(calendar);
+
+		System.out.println(calendar.getTime());
+		
+		for (int i=0; i<5; i++) {
+			for (int j=0; j<7; j++) {
+				int dayNumber = i*7 + j;
+				if ()
+				
+				System.out.format("%2d ", dayNumber);
+				
+			}		
+			System.out.println();
+		}
+
+	}
+	
+	private static int getFirstDayOfMouth(Calendar calendar) {
+		Calendar newCalendar = (Calendar) calendar.clone();
+		newCalendar.set(Calendar.DAY_OF_MONTH, 1);
+		int day = newCalendar.get(Calendar.DAY_OF_WEEK) - 2;
+		if (day < 1) {
+			day = 7 + day;
+		}
+		return day;
+	}
+
+	private static int getDaysOfPreviousMonth(Calendar calendar) {
+		Calendar newCalendar = (Calendar) calendar.clone();
+		int month = calendar.get(Calendar.MONTH) - 1;
+		if (month < 0) {
+			month = 11;
+			int year = calendar.get(Calendar.YEAR) - 1;
+			newCalendar.set(Calendar.YEAR, year);
+		}
+		newCalendar.set(Calendar.MONTH, month);
+
+		System.out.println(calendar.getTime());
+		System.out.println(newCalendar.getTime());
+
+		return getDaysOfMonth(newCalendar);
+	}
+
+	private static int getDaysOfMonth(Calendar calendar) {
+		return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+	}
+}

@@ -4,16 +4,38 @@ import java.util.GregorianCalendar;
 public class Elo {
 	public static void main(String[] args) {
 		Calendar calendar = GregorianCalendar.getInstance();
+		calendar.set(Calendar.MONTH, Calendar.FEBRUARY);
 
-		for (int i = 0; i < 4; i++) {
-			System.out.println(getDaysOfPreviousMonth(calendar));
-			System.out.println(getDaysOfMonth(calendar));
-			System.out.println(calendar.get(Calendar.DAY_OF_WEEK));
-			calendar.set(Calendar.DAY_OF_MONTH, 
-					calendar.get(Calendar.DAY_OF_MONTH) + 1);
+		int monthDays = getDaysOfMonth(calendar);
+		int prevMonthDays = getDaysOfPreviousMonth(calendar);
+		int firstDay = getFirstDayOfMouth(calendar);
+		
+		for (int i=0; i<6; i++) {
+			for (int j=0; j<7; j++) {
+				int dayNumber = i*7 + j;
+				if (dayNumber - firstDay >= monthDays) {
+					System.out.format("%2d ", dayNumber - monthDays - firstDay + 1);
+					//enabled = false
+				} else if (j >= firstDay || dayNumber >= 7) {				
+					System.out.format("%2d ", dayNumber - firstDay + 1);
+				} else {
+					System.out.format("%2d ", prevMonthDays - firstDay + j + 1);
+					//enabled = false
+				}
+			}		
 			System.out.println();
 		}
 
+	}
+
+	private static int getFirstDayOfMouth(Calendar calendar) {
+		Calendar newCalendar = (Calendar) calendar.clone();
+		newCalendar.set(Calendar.DAY_OF_MONTH, 1);
+		int day = newCalendar.get(Calendar.DAY_OF_WEEK) - 2;
+		if (day < 0) {
+			day = day + 7;
+		}
+		return day;
 	}
 
 	private static int getDaysOfPreviousMonth(Calendar calendar) {
