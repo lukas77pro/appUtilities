@@ -1,0 +1,27 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Elo {
+	public static void main(String[] args) {
+		Calendar calendar = GregorianCalendar.getInstance();
+		int aktualnymiech = calendar.get(calendar.MONTH);
+		System.out.println(aktualnymiech);
+		calendar.set(Calendar.MONTH, );
+		System.out.println(calendar.getTime());
+		System.out.println(calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+	}
+	
+	private static int dniPoprzedniego() {
+		Calendar calendar = GregorianCalendar.getInstance(); 
+		int aktualny = calendar.get(Calendar.MONTH) -1;
+		if (aktualny < 0) {
+			aktualny = 11;
+			
+		}
+	}
+	
+	private static int rok() {
+		Calendar calendar = GregorianCalendar.getInstance();
+		return calendar.get(Calendar.YEAR);
+	}
+}
